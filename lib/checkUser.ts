@@ -6,7 +6,7 @@ export const checkUser = async () => {
   if (!user) return null;
   const loggedInUser = await db.user.findUnique({
     where: {
-      checkUserId: user.id,
+      clerkUserId: user.id,
     },
   });
   if (loggedInUser) {
@@ -15,7 +15,7 @@ export const checkUser = async () => {
 
   const newUser = await db.user.create({
     data: {
-      checkUserId: user.id,
+      clerkUserId: user.id,
       name: `${user.firstName} ${user.lastName}`,
       imageUrl: user.imageUrl,
       email: user.emailAddresses[0]?.emailAddress || "",
