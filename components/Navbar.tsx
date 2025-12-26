@@ -3,11 +3,13 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 
 
 export default function Navbar() {
   const[isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -18,7 +20,7 @@ export default function Navbar() {
   };
 
    return (
-    <nav className='sticky top-0 z-50 bg-white dark:bg-gray-900/95 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-600/50 shadow-lg shadow-gray-900/5 dark:shadow-black/30'>
+    <nav className='sticky top-0 z-50 bg-white dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-600/50 shadow-lg shadow-slate-900/5 dark:shadow-black/30'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-14 sm:h-16'>
           {/* Logo Section */}
@@ -28,12 +30,12 @@ export default function Navbar() {
               className='flex items-center gap-2 sm:gap-3 shrink-0 group transition-all duration-300 hover:scale-105'
               onClick={closeMobileMenu}
             >
-              <div className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-linear-to-br from-emerald-500 via-green-500 to-teal-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:rotate-3'>
+              <div className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-linear-to-br from-indigo-500 via-purple-500 to-blue-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:rotate-3'>
                 <span className='text-white text-xs sm:text-sm md:text-lg font-bold'>
-                  🪙
+                  💰
                 </span>
               </div>
-              <span className='text-sm sm:text-base md:text-lg lg:text-xl font-bold bg-linear-to-r from-emerald-600 via-green-500 to-teal-500 bg-clip-text text-transparent'>
+              <span className='text-sm sm:text-base md:text-lg lg:text-xl font-bold bg-linear-to-r from-indigo-600 via-purple-500 to-blue-500 bg-clip-text text-transparent'>
                 <span className='hidden sm:inline'>Xpenso AI</span>
                 <span className='sm:hidden'>Xpenso</span>
               </span>
@@ -44,26 +46,53 @@ export default function Navbar() {
           <div className='hidden md:flex items-center space-x-1'>
             <Link
               href='/'
-              className='relative text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 px-3 lg:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 group'
+              className={`relative px-3 lg:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 group ${
+                pathname === '/'
+                  ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50/80 dark:bg-indigo-900/30'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20'
+              }`}
             >
               <span className='relative z-10'>Home</span>
-              <div className='absolute inset-0 bg-linear-to-r from-emerald-500/10 to-green-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200'></div>
+              <div className={`absolute inset-0 bg-linear-to-r from-indigo-500/10 to-purple-500/10 rounded-xl transition-opacity duration-200 ${
+                pathname === '/' ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+              }`}></div>
+              {pathname === '/' && (
+                <div className='absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-indigo-500 dark:bg-indigo-400 rounded-full'></div>
+              )}
             </Link>
 
             <Link
               href='/about'
-              className='relative text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 px-3 lg:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 group'
+              className={`relative px-3 lg:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 group ${
+                pathname === '/about'
+                  ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50/80 dark:bg-indigo-900/30'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20'
+              }`}
             >
               <span className='relative z-10'>About</span>
-              <div className='absolute inset-0 bg-linear-to-r from-emerald-500/10 to-green-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200'></div>
+              <div className={`absolute inset-0 bg-linear-to-r from-indigo-500/10 to-purple-500/10 rounded-xl transition-opacity duration-200 ${
+                pathname === '/about' ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+              }`}></div>
+              {pathname === '/about' && (
+                <div className='absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-indigo-500 dark:bg-indigo-400 rounded-full'></div>
+              )}
             </Link>
 
             <Link
               href='/contact'
-              className='relative text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 px-3 lg:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 group'
+              className={`relative px-3 lg:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 group ${
+                pathname === '/contact'
+                  ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50/80 dark:bg-indigo-900/30'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20'
+              }`}
             >
               <span className='relative z-10'>Contact</span>
-              <div className='absolute inset-0 bg-linear-to-r from-emerald-500/10 to-green-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200'></div>
+              <div className={`absolute inset-0 bg-linear-to-r from-indigo-500/10 to-purple-500/10 rounded-xl transition-opacity duration-200 ${
+                pathname === '/contact' ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+              }`}></div>
+              {pathname === '/contact' && (
+                <div className='absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-indigo-500 dark:bg-indigo-400 rounded-full'></div>
+              )}
             </Link>
           </div>
 
@@ -74,7 +103,7 @@ export default function Navbar() {
             <div className='hidden sm:block'>
               <SignedOut>
                 <SignInButton>
-                  <button className='relative overflow-hidden bg-linear-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-600 hover:via-green-600 hover:to-teal-600 text-white px-3 sm:px-4 py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95'>
+                  <button className='relative overflow-hidden bg-linear-to-r from-indigo-500 via-purple-500 to-blue-500 hover:from-indigo-600 hover:via-purple-600 hover:to-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95'>
                     <div className='relative z-10 flex items-center gap-1 sm:gap-2'>
                       <span>Sign In</span>
                       <svg
@@ -97,7 +126,7 @@ export default function Navbar() {
               </SignedOut>
 
               <SignedIn>
-                <div className='p-0.5 sm:p-1 rounded-lg sm:rounded-xl bg-linear-to-r from-emerald-100/50 to-green-100/50 dark:from-emerald-900/20 dark:to-green-900/20 backdrop-blur-sm border border-emerald-200/30 dark:border-emerald-700/30'>
+                <div className='p-0.5 sm:p-1 rounded-lg sm:rounded-xl bg-linear-to-r from-indigo-100/50 to-purple-100/50 dark:from-indigo-900/20 dark:to-purple-900/20 backdrop-blur-sm border border-indigo-200/30 dark:border-indigo-700/30'>
                   <UserButton
                     appearance={{
                       elements: {
@@ -114,7 +143,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={toggleMobileMenu}
-              className='md:hidden p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 transition-all duration-200 active:scale-95'
+              className='md:hidden p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20 transition-all duration-200 active:scale-95'
               aria-label='Toggle mobile menu'
             >
               <svg
@@ -153,39 +182,60 @@ export default function Navbar() {
               : 'max-h-0 opacity-0 overflow-hidden'
           }`}
         >
-          <div className='px-2 pt-2 pb-3 space-y-1 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-600/50 mt-2 shadow-lg'>
+          <div className='px-2 pt-2 pb-3 space-y-1 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl border border-slate-200/50 dark:border-slate-600/50 mt-2 shadow-lg'>
             {/* Mobile Navigation Links */}
             <Link
               href='/'
-              className='flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 text-sm font-medium transition-all duration-200 active:scale-95'
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 active:scale-95 ${
+                pathname === '/'
+                  ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50/80 dark:bg-indigo-900/30'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20'
+              }`}
               onClick={closeMobileMenu}
             >
               <span className='text-base'>🏠</span>
               <span>Home</span>
+              {pathname === '/' && (
+                <div className='ml-auto w-1.5 h-1.5 bg-indigo-500 dark:bg-indigo-400 rounded-full'></div>
+              )}
             </Link>
             <Link
               href='/about'
-              className='flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 text-sm font-medium transition-all duration-200 active:scale-95'
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 active:scale-95 ${
+                pathname === '/about'
+                  ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50/80 dark:bg-indigo-900/30'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20'
+              }`}
               onClick={closeMobileMenu}
             >
               <span className='text-base'>ℹ️</span>
               <span>About</span>
+              {pathname === '/about' && (
+                <div className='ml-auto w-1.5 h-1.5 bg-indigo-500 dark:bg-indigo-400 rounded-full'></div>
+              )}
             </Link>
             <Link
               href='/contact'
-              className='flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 text-sm font-medium transition-all duration-200 active:scale-95'
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 active:scale-95 ${
+                pathname === '/contact'
+                  ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50/80 dark:bg-indigo-900/30'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20'
+              }`}
               onClick={closeMobileMenu}
             >
               <span className='text-base'>📞</span>
               <span>Contact</span>
+              {pathname === '/contact' && (
+                <div className='ml-auto w-1.5 h-1.5 bg-indigo-500 dark:bg-indigo-400 rounded-full'></div>
+              )}
             </Link>
 
             {/* Mobile Authentication */}
-            <div className='pt-3 border-t border-gray-200/50 dark:border-gray-600/50'>
+            <div className='pt-3 border-t border-slate-200/50 dark:border-slate-600/50'>
               <SignedOut>
                 <SignInButton>
                   <button
-                    className='w-full bg-linear-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-600 hover:via-green-600 hover:to-teal-600 text-white px-4 py-3 rounded-xl text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 active:scale-95'
+                    className='w-full bg-linear-to-r from-indigo-500 via-purple-500 to-blue-500 hover:from-indigo-600 hover:via-purple-600 hover:to-blue-600 text-white px-4 py-3 rounded-xl text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 active:scale-95'
                     onClick={closeMobileMenu}
                   >
                     <span>Sign In</span>
@@ -207,7 +257,7 @@ export default function Navbar() {
               </SignedOut>
 
               <SignedIn>
-                <div className='flex items-center justify-center p-3 rounded-xl bg-linear-to-r from-emerald-100/50 to-green-100/50 dark:from-emerald-900/20 dark:to-green-900/20 backdrop-blur-sm border border-emerald-200/30 dark:border-emerald-700/30'>
+                <div className='flex items-center justify-center p-3 rounded-xl bg-linear-to-r from-indigo-100/50 to-purple-100/50 dark:from-indigo-900/20 dark:to-purple-900/20 backdrop-blur-sm border border-indigo-200/30 dark:border-indigo-700/30'>
                   <UserButton
                     appearance={{
                       elements: {
