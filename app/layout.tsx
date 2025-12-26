@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ClerkThemeProvider from "@/components/ClerkThemeProvider";
 import Footer from "@/components/Footer";
+import MoneyCursor from "@/components/MoneyCursor";
 import { checkUser } from "@/lib/checkUser";
 
 const inter = Inter({
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <ThemeProvider>
         <html lang="en" suppressHydrationWarning className={`${inter.variable} ${geistMono.variable}`}>
           <body>
+            <MoneyCursor />
             <ClerkThemeProvider>
               <Navbar />
               {children}

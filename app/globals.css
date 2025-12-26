@@ -23,3 +23,12 @@ body {
   background: rgb(var(--background));
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
+
+/* Custom Money Cursor */
+* {
+  cursor: none !important;
+}
+
+a, button, input, textarea, select, [role="button"], [onclick] {
+  cursor: none !important;
+}
