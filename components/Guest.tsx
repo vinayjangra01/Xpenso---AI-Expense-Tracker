@@ -182,7 +182,7 @@ const Guest = () => {
                   </div>
                   <div>
                     <div className='font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base'>
-                      Sarah L.
+                      Sumit Rawal
                     </div>
                     <div className='text-xs sm:text-sm text-slate-500 dark:text-slate-400'>
                       Verified User
@@ -204,12 +204,12 @@ const Guest = () => {
                 <div className='flex items-center gap-3 mb-4'>
                   <div className='w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 via-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg'>
                     <span className='text-white text-xs sm:text-sm font-bold'>
-                      J
+                      D
                     </span>
                   </div>
                   <div>
                     <div className='font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base'>
-                      John D.
+                      Dhruv Sharma
                     </div>
                     <div className='text-xs sm:text-sm text-slate-500 dark:text-slate-400'>
                       Verified User
@@ -231,12 +231,12 @@ const Guest = () => {
                 <div className='flex items-center gap-3 mb-4'>
                   <div className='w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg'>
                     <span className='text-white text-xs sm:text-sm font-bold'>
-                      E
+                      A
                     </span>
                   </div>
                   <div>
                     <div className='font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base'>
-                      Emily R.
+                      Ankit
                     </div>
                     <div className='text-xs sm:text-sm text-slate-500 dark:text-slate-400'>
                       Verified User
