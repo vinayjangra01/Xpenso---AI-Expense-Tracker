@@ -38,6 +38,8 @@ export async function generateExpenseInsights(
   expenses: ExpenseRecord[]
 ): Promise<AIInsight[]> {
   try {
+
+    console.log("Generating expense insights...");
     // Getting ready expense details for AI checking
     const expensesSummary = expenses.map((expense) => ({
       amount: expense.amount,
@@ -67,8 +69,9 @@ export async function generateExpenseInsights(
 
     Give only proper JSON array, nothing extra.`;
 
+    console.log("Calling OpenAI...");
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.0-flash-exp:free',
+      model: process.env.FREEMODEL || 'deepseek/deepseek-r1',
       messages: [
         {
           role: 'system',
@@ -83,6 +86,8 @@ export async function generateExpenseInsights(
       temperature: 0.7,
       max_tokens: 1000,
     });
+
+    console.log("OpenAI response: ", completion.choices[0].message.content);
 
     const response = completion.choices[0].message.content;
     if (!response) {
@@ -138,7 +143,7 @@ export async function generateExpenseInsights(
 export async function categorizeExpense(description: string): Promise<string> {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.0-flash-exp:free',
+      model: process.env.FREEMODEL || 'deepseek/deepseek-r1', 
       messages: [
         {
           role: 'system',
@@ -202,7 +207,7 @@ export async function generateAIAnswer(
     Give only the reply text, no extra formatting.`;
 
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.0-flash-exp:free',
+      model: process.env.FREEMODEL || 'deepseek/deepseek-r1',
       messages: [
         {
           role: 'system',
